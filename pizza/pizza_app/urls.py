@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth import admin
 from django.urls import path
-from . views import addpizza, adminLoging, authenticateadmin,adminHomeView,adminLogoutView
+from . views import addpizza, adminLoging, authenticateadmin,adminHomeView,adminLogoutView, pizzaDelete
 
 urlpatterns = [
     
@@ -9,5 +9,6 @@ urlpatterns = [
     path("adminauthenticate/",authenticateadmin),
     path('admin/homepage/',adminHomeView, name="adminhomepage"),
     path('logoutadmin/',adminLogoutView),
-    path("addpizza/",addpizza)
+    path("addpizza/",addpizza),
+    path("pizzadelete/<int:pizzapk>/",pizzaDelete)
 ]
