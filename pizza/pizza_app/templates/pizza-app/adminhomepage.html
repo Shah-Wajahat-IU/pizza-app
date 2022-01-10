@@ -13,5 +13,47 @@
       <a href="/logoutadmin/" class="btn btn-danger">logout</a>
     </div>
   </nav>
+
+  <form action="/addpizza/" method="post"> {% csrf_token %}
+    <div class="container" style="width: 530px; display: block ;margin: auto;">
+      <input type="text" class="form-control" style="width: 200px; display: inline; margin: auto;" name="pizzaName" placeholder="Pizza Name">
+    <input type="text" class="form-control"  style="width: 200px; display: inline; margin: auto;" name="price" placeholder="Price">
+    <input type="submit" style="display: inline;" value="add" class="btn btn-success">
+
+    </div>
+  </form>
+
+{% if pizzas %}
+<div class="container" style="display: block; margin: auto; width: 700px;">
+  <table class="table caption-top">
+    <caption style="text-align: center;"> List of Pizza</caption>
+    <thead>
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col" style="text-align: center;">Pizza Name</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      {% for pizza in pizzas  %}
+        
+      
+        
+      <tr>
+        <th scope="row">{{pizza.id}}</th>
+        <td style="text-align: center;">{{pizza.name}}</td>
+        <td>{{pizza.price}}</td>
+        
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endif %}
+  
+  
+  
 {% endblock  %}
     

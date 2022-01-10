@@ -3,6 +3,8 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
+from .models import PizzaModel
+
 # Create your views here.
 def adminLoging(request):
     return render(request,"pizza-app/adminLogin.html")
@@ -23,13 +25,26 @@ def authenticateadmin(request):
 
         messages.add_message(request,messages.ERROR,"invalid username or password")
         
-        return redirect('adminlogin')
+        return redirect('adminhomepage')
 
 
 
 def adminHomeView(request):
-    return render(request,"pizza-app/adminhomepage.html")
+    pizza= PizzaModel.objects.all()
+    context={
+        "pizzas":pizza
+    }
+    return render(request,"pizza-app/adminhomepage.html", context)
 
+
+def  addpizza(request):
+    name=request.POST['pizzaName']
+    price=request.POST['price']
+
+    pizza =PizzaModel(name=name,price=price)
+    pizza.save()
+
+    return redirect("adminhomepage")
 
 def adminLogoutView(request):
     logout(request)
