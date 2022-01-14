@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% load static %}
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand">WELCOME</a>
+      <!-- <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form> -->
+
+      <a href="#" class="btn btn-danger">Login</a>
+    </div>
+  </nav>
+
+  <div class="container-fluid" style="position: relative; height: 900%; background-size: cover; background-image: url('static/img/pizza.jpg');">
+    <img src="{% static '/img/pizza.jpg' %}" alt="">
+    <div style="position: absolute; right: 20px; border-radius: 50px; top: 50px; width: 500px; border: inset; padding: 40px; background-color: orange;" class="container">
+     
+        <h1 style="text-align: center; color: white; " > Sign Up</h1>
+        <form action="" method="post">
+            <input class="form-control" style="margin-bottom: 10px;" type="text" placeholder="username" name="User Name" >
+            <input class="form-control" style="margin-bottom: 10px;" type="password" name="password" placeholder="Password">
+            <input class="form-control" style="margin-bottom: 10px;" type="text" name="phoneno" placeholder="Phone No">
+            <input  class="btn btn-success" style="display: block; margin: auto; margin-top: 10px;" type="submit" value="Submit">
+
+        </form>
+    </div>
+</div>
+  {% endblock  %}

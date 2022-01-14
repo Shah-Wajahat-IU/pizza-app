@@ -54,3 +54,7 @@ def adminLogoutView(request):
 def pizzaDelete(request,pizzapk):
     PizzaModel.objects.filter(id=pizzapk).delete()
     return redirect('adminhomepage')
+
+
+def homePage(request):
+    return render(request,"pizza-app/homePage.html")
