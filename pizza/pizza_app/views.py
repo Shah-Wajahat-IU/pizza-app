@@ -2,8 +2,9 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.models import User
 
-from .models import PizzaModel
+from .models import CustomerModel, PizzaModel
 
 # Create your views here.
 def adminLoging(request):
@@ -58,3 +59,45 @@ def pizzaDelete(request,pizzapk):
 
 def homePage(request):
     return render(request,"pizza-app/homePage.html")
+
+
+def userSignup(request):
+    username=request.POST['username']
+    password=request.POST['password']
+    phoneno=request.POST['phoneno']
+
+    if User.objects.filter(username=username).exists():
+        messages.add_message(request,messages.ERROR,"User already exists")
+        return redirect("homepage")
+
+    User.objects.create_user(username=username,password=password).save()
+    lastObject=len(User.objects.all())-1
+    CustomerModel(id=User.objects.all()[int(lastObject)].id ,phoneno=phoneno).save()
+    messages.add_message(request,messages.ERROR,"User successfully created")
+    return redirect('homepage')
+
+
+def loginpageView(request):
+
+    return render(request,'pizza-app/login.html')
+
+def userLogin(request):
+    username=request.POST['username']
+    password=request.POST['password']
+
+    user = authenticate( username=username,password=password)
+    print(user)
+
+
+    if user is not None:
+        login(request,user)
+        return redirect("customerpage")
+
+    if user is None:
+
+        messages.add_message(request,messages.ERROR,"invalid username or password")
+        
+        return redirect('loginpageView')
+
+def customerPageView(request):
+    return render(request,"pizza-app/customerpage.html")
